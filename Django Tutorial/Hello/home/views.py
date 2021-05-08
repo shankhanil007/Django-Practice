@@ -16,6 +16,7 @@ def about(request):
 def services(request):
     return render(request, 'services.html')
  
+ 
 def contact(request):
     if request.method == "POST":
         name = request.POST.get('name')
