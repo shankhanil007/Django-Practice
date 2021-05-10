@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 MERCHANT_KEY = 'Your-Merchant-Key-Here'
 
+
 def index(request):
     allProds = []
     catprods = Product.objects.values('category', 'id')
