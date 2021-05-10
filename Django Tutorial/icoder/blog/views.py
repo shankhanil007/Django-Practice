@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse
+from blog.models import Post
 
 # Create your views here.
 def blogHome(request): 
