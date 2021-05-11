@@ -45,8 +45,16 @@ def displayNews(request):
             
         date = soup2.find('dt',{'class':'pubdata'}).text
 
-        articles_list.append([title, story_url, brief, images])
+        dict = {
+            "images" : images,
+            "title" : title,
+            "story_url" : story_url,
+            "brief" : brief,
+            "date" : date
+        }
+
+        articles_list.append(dict)
 
     print("done")
     context={'allNews': articles_list}
-    return render(request, "home.html",context )
+    return render(request, "home.html", context )

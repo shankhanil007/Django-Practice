@@ -89,38 +89,29 @@
 			</div>
 		</div>
 
-        {{ allNews }}
+        {% for info in allNews %}
+            <div class="row" style="margin-bottom: 25px;">
+               <div class="col-xl-2 col-4 d-flex justify-content-end">
+                    <img src="{{info.images}}" style="height: 120px; width: 120px;">
+                </div>
 
+                <div class="col-xl-10 col-8 align-self-center">
+                    <p class="lead" style="font-weight: 600; margin-bottom: 3px"> <a href="{{info.story_url}}">
+                            {{info.title}}
+                        </a> </p>
+                    <p style="font-weight: 200; margin-bottom: 2px">
+                        {{info.date}}
+                    </p>
+                    <p style="font-weight: 400; ">
+                        {{info.brief}}
+                    </p>
+                </div> 
+            </div>
+        {% endfor %}
+    </div>
+        
 
-
-
-
-		{% comment %} <% if(data!=null){ %>
-			<% data.forEach(function(info){ %>
-				<div class="row" style="margin-bottom: 25px;">
-					<div class="col-xl-2 col-4 d-flex justify-content-end">
-						<img src="<%= info.img %>" style="height: 120px; width: 120px;">
-					</div>
-
-					<div class="col-xl-10 col-8 align-self-center">
-						<p class="lead" style="font-weight: 600; margin-bottom: 3px"> <a href="<%= info.url %>">
-								<%= info.headline %>
-							</a> </p>
-						<p style="font-weight: 200; margin-bottom: 2px">
-							<%= info.source %> - <%= info.time %>
-						</p>
-						<p style="font-weight: 400; ">
-							<%= info.desc %>
-						</p>
-
-					</div>
-
-				</div>
-
-				<% }) %>
-					<% } %> {% endcomment %}
-
-	</div>
+	
 
 
 
