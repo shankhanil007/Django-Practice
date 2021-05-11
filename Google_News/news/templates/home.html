@@ -1,3 +1,4 @@
+{% load socialaccount %}
 <!DOCTYPE html>
 <html>
 
@@ -65,7 +66,7 @@
 						<a class="dropdown-item" href="/riskChecker">Covid Risk Ckecker</a>
 				</li>
 			</ul>
-
+            <div class="ml-auto form-inline ">
             {% if user.is_authenticated %}
                 <ul class="navbar-nav mr-2">
                     <li class="nav-item dropdown">
@@ -75,7 +76,7 @@
                         </div>
                     </li>
                 </ul>
-
+            </div>
             {% else %}
                 <!-- Button to  trigger Login modal -->
                 <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#loginModal">
@@ -87,7 +88,7 @@
                 </button>
             {% endif %}
 		</div>
-	</nav> {% endcomment %}
+	</nav>  {% endcomment %}
 
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -97,55 +98,53 @@
         </button>
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item {% block homeactive %}  {% endblock homeactive %}">
-              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item {% block aboutactive %}  {% endblock aboutactive %}" >
-              <a class="nav-link" href="/about">About</a>
-            </li>
-            <li class="nav-item {% block contactactive %}  {% endblock contactactive %} ">
-              <a class="nav-link" href="/contact">Contact</a>
-            </li>
-            <li class="nav-item {% block blogactive %}  {% endblock blogactive %} ">
-              <a class="nav-link" href="/blog">Blog</a>
-            </li>
-            
-          </ul>
-          <div class="ml-auto form-inline ">
-          <form method="get" action="/search"class="my-2 my-lg-0 mx-3">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query" id="query">
-            <button class="btn btn-primary my-2 my-sm-0 " type="submit">Search</button>
-            <a href="/admin" role="button" target="_blank" class="btn btn-outline-success m-2 my-sm-0"> Admin Panel </a>
-          </form>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item {% block homeactive %}  {% endblock homeactive %}">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item {% block aboutactive %}  {% endblock aboutactive %}" >
+                <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item {% block contactactive %}  {% endblock contactactive %} ">
+                <a class="nav-link" href="/contact">Contact</a>
+                </li>
+                <li class="nav-item {% block blogactive %}  {% endblock blogactive %} ">
+                <a class="nav-link" href="/blog">Blog</a>
+                </li>
+            </ul>
+            <div class="ml-auto form-inline ">
+                <form method="get" action="/search"class="my-2 my-lg-0 mx-3">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query" id="query">
+                    <button class="btn btn-primary my-2 my-sm-0 " type="submit">Search</button>
+                    <a href="/admin" role="button" target="_blank" class="btn btn-outline-success m-2 my-sm-0"> Admin Panel </a>
+                </form>
 
-     
-
-{% if user.is_authenticated %}
-<ul class="navbar-nav mr-2">
-<li class="nav-item dropdown">
-<a class="nav-link dropdown-toggle" href='#' id="navbarDropdown" role="button" data-toggle="dropdown"> Welcome {{request.user}}</a>
-<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/logout">Logout</a>
-
+                {% if user.is_authenticated %}
+                    <ul class="navbar-nav mr-2">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href='#' id="navbarDropdown" role="button" data-toggle="dropdown"> Welcome {{request.user}}</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/logout">Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+            </div>
+                {% else %}
+                <!-- Button to  trigger Login modal -->
+                    <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#loginModal">
+                        Login
+                    </button>
+                    <a href="{% provider_login_url 'google' %}">
+                        <button type="button" class="btn btn-primary mr-2" >
+                        Google Login
+                        </button>
+                    </a>
+                    <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#signupModal">
+                        SignUp
+                    </button>
+                {% endif %}
         </div>
-      </li>
-      </ul>
-      </div>
-{% else %}
-  <!-- Button to  trigger Login modal -->
-<button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#loginModal">
-Login
-</button>
-
-<button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#signupModal">
-SignUp
-</button>
-{% endif %}
-
-
-        </div>
-      </nav>
+    </nav> 
 
     {% for message in messages  %}            
         <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
