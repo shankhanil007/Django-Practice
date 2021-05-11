@@ -80,6 +80,7 @@
 		<div class="row">
 			<div class="search" style=" margin: 20px auto 80px auto;">
 				<form action="/news" method="POST">
+                    {% csrf_token %}
 					<div class="form-group">
 						<button class="btn btn-lg btn-primary btn-block"> SUBMIT </button>
 					</div>
@@ -87,6 +88,13 @@
 				</form>
 			</div>
 		</div>
+
+        {{ allNews }}
+
+
+
+
+
 		{% comment %} <% if(data!=null){ %>
 			<% data.forEach(function(info){ %>
 				<div class="row" style="margin-bottom: 25px;">
