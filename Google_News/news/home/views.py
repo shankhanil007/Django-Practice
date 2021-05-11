@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
-
+from django.contrib import messages 
 from django.contrib.auth.models import User 
 from django.contrib.auth  import authenticate,  login, logout
 
@@ -75,15 +75,18 @@ def handleSignUp(request):
 
         # check for errorneous input
         if len(username)<10:
-            messages.error(request, " Your user name must be under 10 characters")
-            return redirect('home')
+            messages.error(request, " Your user name must be more than 10 characters")
+            context={'allNews': []}
+            return render(request, "home.html", context)
 
         if not username.isalnum():
             messages.error(request, " User name should only contain letters and numbers")
-            return redirect('home')
+            context={'allNews': []}
+            return render(request, "home.html", context)
         if (pass1!= pass2):
-             messages.error(request, " Passwords do not match")
-             return redirect('home')
+            messages.error(request, " Passwords do not match")
+            context={'allNews': []}
+            return render(request, "home.html", context)
         
         # Create the user
         myuser = User.objects.create_user(username, email, pass1)
@@ -107,10 +110,12 @@ def handeLogin(request):
         if user is not None:
             login(request, user)
             messages.success(request, "Successfully Logged In")
-            return redirect("home")
+            context={'allNews': []}
+            return render(request, "home.html", context)
         else:
             messages.error(request, "Invalid credentials! Please try again")
-            return redirect("home")
+            context={'allNews': []}
+            return render(request, "home.html", context)
 
     return HttpResponse("404- Not found")
    
@@ -120,4 +125,5 @@ def handeLogin(request):
 def handelLogout(request):
     logout(request)
     messages.success(request, "Successfully logged out")
-    return redirect('home')
+    context={'allNews': []}
+    return render(request, "home.html", context)
