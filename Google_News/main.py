@@ -30,3 +30,4 @@ for news in temp:
     date = soup2.find('dt',{'class':'pubdata'}).text
 
     articles_list.append([title, story_url, brief, images])
+    
